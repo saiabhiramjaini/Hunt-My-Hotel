@@ -117,7 +117,11 @@ const filterHotels = async (req: Request, res: Response) => {
 
 const searchHotels = async (req: Request, res: Response) => {
     try {
-        const searchString = req.query.q as string || "";
+        const searchString = req.query.q as string;
+
+        if(!searchString){
+          return res.status(401).json("Enter search details");
+        }
 
         // Create a search query that looks for the search string in relevant fields
         const searchQuery = {

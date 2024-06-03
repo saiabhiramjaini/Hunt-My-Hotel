@@ -1,0 +1,13 @@
+1. npm init -y
+2. npx tsc --init (if typescript is not installed "npm i -g typescript")
+3. npm i express nodemon mongoose dotenv cors 
+4. create 2 folders 
+    a. src
+    b. dist
+5. In tsconfig.json:
+    'rootDir: "./src" '
+    'outDir: "./dist" ' 
+6. write your code in src
+7. create index.ts in src
+8. In package.json under scripts add : "start": "nodemon dist/index.js"
+9. to compile : tsc -b

@@ -1,0 +1,25 @@
+1. npx create-vite@latest client (Select preferred framework)
+2. cd client 
+3. npm install  
+4. Initialise tailwind "https://tailwindcss.com/docs/guides/vite"
+5. npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init -p
+6. In tailwind.config.js:
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+7. In index.css:
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+8. npm run dev -> to run the app

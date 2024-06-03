@@ -1,0 +1,20 @@
+1. npm init -y
+2. npx tsc --init
+3. in tsconfig.json:
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+4. make a folder with name src and create a file with name index.ts
+5. make a folder with name dist
+6. write code in index.ts (you can create multiple files also)
+7. tsc -b
+8. goto package.json and rename the "name: username/auth-common"
+9. change main: "dist/index.js"
+10. create a file as .npmignore and add src in that file(node_modules are by default ignored by npmignore)
+11. .npmignore - add "/src"
+12. .gitignore - add "/node_modules"
+13. npm login
+14. npm publish --access public
+15. https://www.npmjs.com/settings/abhiram2k03/packages
+16. To update : npm version patch/minor/major
+		npm publish

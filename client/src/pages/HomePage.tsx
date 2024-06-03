@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { HotelData, locationEnum, starRatingEnum, roomTypesEnum } from "@abhiram2k03/hotel-common";
+import {
+  HotelData,
+  locationEnum,
+  starRatingEnum,
+  roomTypesEnum,
+} from "@abhiram2k03/hotel-common";
 import { BACKEND_URL } from "../utils/secrets";
+import Lottie from "lottie-react";
+import travellerAnimation from "../assets/lottie/traveller.json";
 
 export const HomePage = () => {
-  const navigate = useNavigate();
-
   const [hotels, setHotels] = useState<HotelData[]>([]);
 
   const [capacity, setCapacity] = useState<number>(1);
@@ -30,7 +34,7 @@ export const HomePage = () => {
 
     try {
       const response = await axios.get(`${BACKEND_URL}/hotels/filter`, {
-        params: data
+        params: data,
       });
       setHotels(response.data);
       console.log("Hotels Data:", response.data);
@@ -40,14 +44,18 @@ export const HomePage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center mb-8">HotelFinder</h1>
+    <div className="container mx-auto px-20">
+      <div className="font-bold text-xl py-10">
+        Relax, we've got you covered. Simply provide your preferences, and we'll
+        present you with the hotel information tailored to your needs.
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {/* Filters Section */}
-        <div className="col-span-1 md:col-span-1 p-4 border border-gray-200 rounded-lg shadow-md">
+        <div className="col-span-1 md:col-span-1 p-6 border border-gray-200 rounded-3xl shadow-2xl">
           <h2 className="text-xl font-semibold mb-4">Filters</h2>
           <div className="mb-4">
-            <label htmlFor="capacity" className="block text-gray-700">Capacity</label>
+            <label htmlFor="capacity" className="block text-gray-700">
+              Capacity
+            </label>
             <input
               type="range"
               id="capacity"
@@ -61,7 +69,9 @@ export const HomePage = () => {
             <span>{capacity}</span>
           </div>
           <div className="mb-4">
-            <label htmlFor="location" className="block text-gray-700">Location</label>
+            <label htmlFor="location" className="block text-gray-700">
+              Location
+            </label>
             <select
               id="location"
               name="location"
@@ -97,7 +107,9 @@ export const HomePage = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="rating" className="block text-gray-700">Rating</label>
+            <label htmlFor="rating" className="block text-gray-700">
+              Rating
+            </label>
             <select
               id="rating"
               name="rating"
@@ -114,7 +126,9 @@ export const HomePage = () => {
             </select>
           </div>
           <div className="mb-4">
-            <label htmlFor="roomType" className="block text-gray-700">Room Type</label>
+            <label htmlFor="roomType" className="block text-gray-700">
+              Room Type
+            </label>
             <select
               id="roomType"
               name="roomType"
@@ -130,21 +144,23 @@ export const HomePage = () => {
               ))}
             </select>
           </div>
-          <button 
+          <button
             onClick={onClickHandler}
-            className="w-full bg-blue-500 text-white rounded p-2 hover:bg-blue-600"
+            className="w-full bg-black text-white rounded p-2 hover:bg-black"
           >
             Get Hotels
           </button>
         </div>
 
-        {/* Hotels List Section */}
         <div className="col-span-1 md:col-span-3 p-4">
-          <h2 className="text-xl font-semibold mb-4">Hotel Results:</h2>
           {hotels.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              
               {hotels.map((hotel) => (
-                <div key={hotel.name} className="border border-gray-200 rounded-lg p-4 shadow-md">
+                <div
+                  key={hotel._id}
+                  className="border border-gray-200 rounded-lg p-4 shadow-md"
+                >
                   <h3 className="text-lg font-bold mb-2">{hotel.name}</h3>
                   <p>Location: {hotel.location}</p>
                   <p>Price Per Night: ${hotel.pricePerNight}</p>
@@ -156,26 +172,13 @@ export const HomePage = () => {
               ))}
             </div>
           ) : (
-            <p className="text-gray-500">No hotels found. Please adjust your filters.</p>
+            <div className="flex justify-center">
+              <div className="w-1/2 h-96 flex items-center justify-center">
+                <Lottie loop animationData={travellerAnimation} />
+              </div>
+            </div>
           )}
         </div>
-      </div>
-
-      <div className="mt-8 flex justify-center">
-        <button
-          onClick={() => navigate("/addHotel")}
-          className="bg-green-500 text-white rounded p-2 hover:bg-green-600"
-        >
-          Add Hotel
-        </button>
-      </div>
-      <div className="mt-8 flex justify-center">
-        <button
-          onClick={() => navigate("/search")}
-          className="bg-green-500 text-white rounded p-2 hover:bg-green-600"
-        >
-          Search Hotel
-        </button>
       </div>
     </div>
   );
