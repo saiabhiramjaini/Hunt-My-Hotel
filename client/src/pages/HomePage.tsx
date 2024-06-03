@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { HotelData, locationEnum, starRatingEnum, roomTypesEnum } from "@abhiram2k03/hotel-common";
+import { BACKEND_URL } from "../utils/secrets";
 
 export const HomePage = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export const HomePage = () => {
     console.log("Form Data:", data);
 
     try {
-      const response = await axios.get("http://localhost:8080/api/v1/hotels/filter", {
+      const response = await axios.get(`${BACKEND_URL}/hotels/filter`, {
         params: data
       });
       setHotels(response.data);
@@ -166,6 +167,14 @@ export const HomePage = () => {
           className="bg-green-500 text-white rounded p-2 hover:bg-green-600"
         >
           Add Hotel
+        </button>
+      </div>
+      <div className="mt-8 flex justify-center">
+        <button
+          onClick={() => navigate("/search")}
+          className="bg-green-500 text-white rounded p-2 hover:bg-green-600"
+        >
+          Search Hotel
         </button>
       </div>
     </div>

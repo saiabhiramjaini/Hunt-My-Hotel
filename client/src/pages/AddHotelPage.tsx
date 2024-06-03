@@ -8,6 +8,7 @@ import {
   roomTypesEnum,
   amenitiesEnum,
 } from "@abhiram2k03/hotel-common";
+import { BACKEND_URL } from "../utils/secrets";
 
 export const AddHotelPage = () => {
   const navigate = useNavigate();
@@ -26,13 +27,12 @@ export const AddHotelPage = () => {
     e.preventDefault();
     console.log(hotel);
     try {
-      // Send hotel data to the server to add the hotel
       const response = await axios.post(
-        "http://localhost:8080/api/v1/hotel",
+        `${BACKEND_URL}/hotel`,
         hotel
       );
       console.log("Hotel added successfully:", response.data);
-      // Redirect to the homepage or display a success message
+      alert("Hotel details added successfully");
       navigate("/");
     } catch (error) {
       console.error("Error adding hotel:", error);

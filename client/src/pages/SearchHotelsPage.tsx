@@ -1,6 +1,7 @@
 import { HotelData } from "@abhiram2k03/hotel-common";
 import { useState } from "react";
 import axios from "axios";
+import { BACKEND_URL } from "../utils/secrets";
 
 export const SearchHotelsPage = () => {
     const [hotels, setHotels] = useState<HotelData[]>([]);
@@ -18,7 +19,7 @@ export const SearchHotelsPage = () => {
         setError(null);
 
         try {
-            const response = await axios.get(`http://localhost:8080/api/v1/hotels/search`, {
+            const response = await axios.get(`${BACKEND_URL}/hotels/search`, {
                 params: {
                     q: search,
                 },
@@ -33,9 +34,9 @@ export const SearchHotelsPage = () => {
     };
 
     return (
-        <div className="container mx-auto p-4"> {/* Apply Tailwind CSS container class */}
-            <div className="mb-4"> {/* Apply Tailwind CSS margin bottom class */}
-                <label htmlFor="search" className="mr-2">Search</label> {/* Apply Tailwind CSS margin right class */}
+        <div className="container mx-auto p-4"> 
+            <div className="mb-4">
+                <label htmlFor="search" className="mr-2">Search</label>
                 <input
                     type="text"
                     id="search"
@@ -47,14 +48,14 @@ export const SearchHotelsPage = () => {
             </div>
 
             {loading && <p>Loading...</p>}
-            {error && <p className="text-red-500">{error}</p>} {/* Apply Tailwind CSS text color class */}
+            {error && <p className="text-red-500">{error}</p>} 
 
             <div>
                 {hotels.length > 0 ? (
                     hotels.map((hotel, index) => (
-                        <div key={index} className="border rounded p-4 mb-4"> {/* Apply Tailwind CSS border, rounded, padding and margin bottom class */}
-                            <h2 className="text-xl font-bold mb-2">{hotel.name}</h2> {/* Apply Tailwind CSS heading and font weight class */}
-                            <p><span className="font-bold">Location:</span> {hotel.location}</p> {/* Apply Tailwind CSS font weight class */}
+                        <div key={index} className="border rounded p-4 mb-4"> 
+                            <h2 className="text-xl font-bold mb-2">{hotel.name}</h2> 
+                            <p><span className="font-bold">Location:</span> {hotel.location}</p>
                             <p><span className="font-bold">Price per Night:</span> {hotel.pricePerNight}</p>
                             <p><span className="font-bold">Capacity:</span> {hotel.capacity}</p>
                             <p><span className="font-bold">Star Rating:</span> {hotel.starRating}</p>
