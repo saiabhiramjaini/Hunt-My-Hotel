@@ -97,7 +97,7 @@ const filterHotels = async (req: Request, res: Response) => {
       } else if (minBudget) {
         query.pricePerNight = { $gte: Number(minBudget) };
       } else if (maxBudget) {
-        query.pricePerNight = { $lte: Number(maxBudget) };
+        query.pricePerNight = { $lte: Number(maxBudget) }; 
       }
       if (minRating) {
         query.starRating = { $gte: Number(minRating) };

@@ -16,8 +16,8 @@ export const AddHotelPage = () => {
   const [hotel, setHotel] = useState<HotelData>({
     name: "",
     location: "",
-    pricePerNight: 0,
-    capacity: 1,
+    pricePerNight: 0, 
+    capacity: 1, 
     starRating: 1,
     amenities: [],
     roomTypes: [],
